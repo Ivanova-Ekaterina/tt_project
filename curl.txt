@@ -1,28 +1,5 @@
-* Unwillingly accepted illegal URL using 1 slash!
-*   Trying 217.69.139.201...
-* TCP_NODELAY set
-* Connected to mail.ru (217.69.139.201) port 80 (#0)
-> GET /robots.txt HTTP/1.1
-> Host: mail.ru
-> Accept: */*
-> User-Agent:telnet/hands
-> 
-< HTTP/1.1 302 Moved Temporarily
-< Server: nginx/1.10.3
-< Date: Sun, 14 Oct 2018 11:44:12 GMT
-< Content-Type: text/html
-< Content-Length: 161
-< Connection: keep-alive
-< Location: https://mail.ru/robots.txt
-< X-XSS-Protection: 1; mode=block; report=https://cspreport.mail.ru/xxssprotection
-< X-Content-Type-Options: nosniff
-< 
-<html>
-<head><title>302 Found</title></head>
-<body bgcolor="white">
-<center><h1>302 Found</h1></center>
-<hr><center>nginx/1.10.3</center>
-</body>
-</html>
-* Connection #0 to host mail.ru left intact
+curl -o robots.txt http://www.mail.ru/robots.txt
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    50  100    50    0     0    847      0 --:--:-- --:--:-- --:--:--   847
 

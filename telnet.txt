@@ -1,26 +1,23 @@
-Trying 94.100.180.201...
-Connected to mail.ru.
+telnet www.mail.ru 80
+Trying 217.69.139.70...
+Connected to www.mail.ru.
 Escape character is '^]'.
-GET http://www.ru/robots.txt HTTP/1.0
-Accept: text/html, text/plain
-User-Agent: telnet/hands
+GET /robots.txt HTTP/1.1
+Host: www.mail.ru
 
-HTTP/1.1 302 Moved Temporarily
-Server: nginx/1.10.3
-Date: Sun, 14 Oct 2018 11:48:17 GMT
-Content-Type: text/html
-Content-Length: 161
+HTTP/1.1 200 OK
+Server: nginx/1.6.2
+Date: Mon, 15 Oct 2018 17:44:48 GMT
+Content-Type: text/plain
+Content-Length: 50
+Last-Modified: Wed, 19 Nov 2014 17:19:12 GMT
 Connection: close
-Location: https://www.ru/robots.txt
-X-XSS-Protection: 1; mode=block; report=https://cspreport.mail.ru/xxssprotection
-X-Content-Type-Options: nosniff
+ETag: "546cd110-32"
+X-Frame-Options: SAMEORIGIN
+Accept-Ranges: bytes
 
-<html>
-<head><title>302 Found</title></head>
-<body bgcolor="white">
-<center><h1>302 Found</h1></center>
-<hr><center>nginx/1.10.3</center>
-</body>
-</html>
+User-Agent: *
+Allow: /$
+Disallow: /
+Host: mail.ru
 Connection closed by foreign host.
-
