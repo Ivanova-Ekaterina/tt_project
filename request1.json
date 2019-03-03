@@ -1,0 +1,1 @@
+{"jsonrpc": "2.0", "method": "send_message", "params": {"nick": "ikate", "chat": "kvant", "content": "hw"}, "id": "5"}

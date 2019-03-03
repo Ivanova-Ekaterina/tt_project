@@ -47,25 +47,25 @@ class JSONRPCTest(TestCase):
                     '1': [4, 'blocher', 'matveeva sveta', 2, 'How are you?', 'Tue, 30 Oct 2018 18:22:11 GMT']
                     }
                }
-        self.assertEqual(True, compare_json_data(data, json.loads(rv.data)))
+        self.assertTrue(compare_json_data(data, json.loads(rv.data)))
 
     def test_find_user(self):
         rv = self.app.post('/api/', data='{"jsonrpc": "2.0", "method": "find_user", "params": {"nick": "ikate"}, "id": "2"}')
         self.assertEqual(rv.status_code, 200)
         data = {'id': '2', 'jsonrpc': '2.0', 'result': {'name': 'ivanova ekaterina', 'user_id': 1}}
-        self.assertEqual(True, compare_json_data(data, json.loads(rv.data)))
+        self.assertTrue(compare_json_data(data, json.loads(rv.data)))
 
     def test_find_users(self):
         rv = self.app.post('/api/', data='{"jsonrpc": "2.0", "method": "find_users", "params": {"name": "ivanova ekaterina"}, "id": "3"}')
         self.assertEqual(rv.status_code, 200)
         data = {'id': '3', 'jsonrpc': '2.0', 'result': {'0': [1, 'ikate']}}
-        self.assertEqual(True, compare_json_data(data, json.loads(rv.data)))
+        self.assertTrue(compare_json_data(data, json.loads(rv.data)))
 
     def test_get_chats_list(self):
         rv = self.app.post('/api/', data='{"jsonrpc": "2.0", "method": "get_chats_list", "params": {"nick": "ikate"}, "id": "4"}')
         self.assertEqual(rv.status_code, 200)
         data = {'id': '4', 'jsonrpc': '2.0', 'result': {'0': [1, 'tt'], '1': [2, 'kvant']}}
-        self.assertEqual(True, compare_json_data(data, json.loads(rv.data)))
+        self.assertTrue(compare_json_data(data, json.loads(rv.data)))
 
     def test_create_personal_chat(self):
         rv = self.app.post('/api/', data='{"jsonrpc": "2.0", "method": "create_personal_chat", "params": {"topic": "freedom"}, "id": "5"}')
