@@ -3,16 +3,16 @@ class Config(object):
 
 class ProductionConfig(Config):
     TESTING = False
-    DB_NAME = "chat"
+    DB_NAME = "track"
     DB_HOST = "localhost"
-    DB_USER = "chat"
-    DB_PASS = "chat"
+    DB_USER = "ekaterina"
+    DB_PASS = ""
 
 
 class TestingConfig(Config):
     TESTING = True
     DEBUG = True
-    DB_NAME = "chat"
+    DB_NAME = "track_test"
     DB_HOST = "localhost"
-    DB_USER = "chat"
-    DB_PASS = "chat"
+    DB_USER = "ekaterina"
+    DB_PASS = ""

@@ -1,0 +1,493 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.2
+-- Dumped by pg_dump version 11.2
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: attachments; Type: TABLE; Schema: public; Owner: ekaterina
+--
+
+CREATE TABLE public.attachments (
+    attach_id integer NOT NULL,
+    message_id integer,
+    chat_id integer,
+    user_id integer,
+    type text NOT NULL,
+    url text NOT NULL
+);
+
+
+ALTER TABLE public.attachments OWNER TO ekaterina;
+
+--
+-- Name: attachments_attach_id_seq; Type: SEQUENCE; Schema: public; Owner: ekaterina
+--
+
+CREATE SEQUENCE public.attachments_attach_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.attachments_attach_id_seq OWNER TO ekaterina;
+
+--
+-- Name: attachments_attach_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ekaterina
+--
+
+ALTER SEQUENCE public.attachments_attach_id_seq OWNED BY public.attachments.attach_id;
+
+
+--
+-- Name: chats; Type: TABLE; Schema: public; Owner: ekaterina
+--
+
+CREATE TABLE public.chats (
+    chat_id integer NOT NULL,
+    is_group_chat boolean,
+    topic text NOT NULL,
+    last_message text NOT NULL
+);
+
+
+ALTER TABLE public.chats OWNER TO ekaterina;
+
+--
+-- Name: chats_chat_id_seq; Type: SEQUENCE; Schema: public; Owner: ekaterina
+--
+
+CREATE SEQUENCE public.chats_chat_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.chats_chat_id_seq OWNER TO ekaterina;
+
+--
+-- Name: chats_chat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ekaterina
+--
+
+ALTER SEQUENCE public.chats_chat_id_seq OWNED BY public.chats.chat_id;
+
+
+--
+-- Name: members; Type: TABLE; Schema: public; Owner: ekaterina
+--
+
+CREATE TABLE public.members (
+    member_id integer NOT NULL,
+    chat_id integer,
+    user_id integer,
+    new_messages text NOT NULL,
+    last_read_message_id integer
+);
+
+
+ALTER TABLE public.members OWNER TO ekaterina;
+
+--
+-- Name: members_member_id_seq; Type: SEQUENCE; Schema: public; Owner: ekaterina
+--
+
+CREATE SEQUENCE public.members_member_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.members_member_id_seq OWNER TO ekaterina;
+
+--
+-- Name: members_member_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ekaterina
+--
+
+ALTER SEQUENCE public.members_member_id_seq OWNED BY public.members.member_id;
+
+
+--
+-- Name: messages; Type: TABLE; Schema: public; Owner: ekaterina
+--
+
+CREATE TABLE public.messages (
+    message_id integer NOT NULL,
+    chat_id integer,
+    user_id integer,
+    content text NOT NULL,
+    added_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.messages OWNER TO ekaterina;
+
+--
+-- Name: messages_message_id_seq; Type: SEQUENCE; Schema: public; Owner: ekaterina
+--
+
+CREATE SEQUENCE public.messages_message_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.messages_message_id_seq OWNER TO ekaterina;
+
+--
+-- Name: messages_message_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ekaterina
+--
+
+ALTER SEQUENCE public.messages_message_id_seq OWNED BY public.messages.message_id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: ekaterina
+--
+
+CREATE TABLE public.users (
+    user_id integer NOT NULL,
+    name text NOT NULL,
+    nick text NOT NULL,
+    avatar text
+);
+
+
+ALTER TABLE public.users OWNER TO ekaterina;
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: ekaterina
+--
+
+CREATE SEQUENCE public.users_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_user_id_seq OWNER TO ekaterina;
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ekaterina
+--
+
+ALTER SEQUENCE public.users_user_id_seq OWNED BY public.users.user_id;
+
+
+--
+-- Name: attachments attach_id; Type: DEFAULT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.attachments ALTER COLUMN attach_id SET DEFAULT nextval('public.attachments_attach_id_seq'::regclass);
+
+
+--
+-- Name: chats chat_id; Type: DEFAULT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.chats ALTER COLUMN chat_id SET DEFAULT nextval('public.chats_chat_id_seq'::regclass);
+
+
+--
+-- Name: members member_id; Type: DEFAULT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.members ALTER COLUMN member_id SET DEFAULT nextval('public.members_member_id_seq'::regclass);
+
+
+--
+-- Name: messages message_id; Type: DEFAULT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.messages ALTER COLUMN message_id SET DEFAULT nextval('public.messages_message_id_seq'::regclass);
+
+
+--
+-- Name: users user_id; Type: DEFAULT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.users_user_id_seq'::regclass);
+
+
+--
+-- Data for Name: attachments; Type: TABLE DATA; Schema: public; Owner: ekaterina
+--
+
+COPY public.attachments (attach_id, message_id, chat_id, user_id, type, url) FROM stdin;
+\.
+
+
+--
+-- Data for Name: chats; Type: TABLE DATA; Schema: public; Owner: ekaterina
+--
+
+COPY public.chats (chat_id, is_group_chat, topic, last_message) FROM stdin;
+1	f	tt	Hi!
+2	f	kvant	Bye
+3	f	mipt	Message 10
+4	f	intel	Test 10
+5	f	home	J
+\.
+
+
+--
+-- Data for Name: members; Type: TABLE DATA; Schema: public; Owner: ekaterina
+--
+
+COPY public.members (member_id, chat_id, user_id, new_messages, last_read_message_id) FROM stdin;
+1	1	1	Good morning!	\N
+2	1	2	Hi!	\N
+3	2	1	Good	\N
+4	2	3	Bye	\N
+5	3	2	Message 10	\N
+6	3	4	Message 9	\N
+7	4	4	Test 10	\N
+8	4	5	Test 9	\N
+9	5	3	J	\N
+10	5	5	I	\N
+\.
+
+
+--
+-- Data for Name: messages; Type: TABLE DATA; Schema: public; Owner: ekaterina
+--
+
+COPY public.messages (message_id, chat_id, user_id, content, added_at) FROM stdin;
+1	1	1	Hello!	2019-03-09 00:00:00
+2	1	1	How are you?	2019-03-09 00:00:00
+3	1	2	Better tnan you	2019-03-09 00:00:00
+4	1	1	Ok	2019-03-09 00:00:00
+5	1	2	What is the news?	2019-03-09 00:00:00
+6	1	1	Nothing	2019-03-09 00:00:00
+7	1	2	Bye	2019-03-09 00:00:00
+8	1	1	Goodbye	2019-03-09 00:00:00
+9	1	2	Good morning!	2019-03-10 00:00:00
+10	1	1	Hi!	2019-03-10 00:00:00
+11	2	1	Hi!	2019-03-08 00:00:00
+12	2	3	Hello!	2019-03-08 00:00:00
+13	2	3	How is the weather?	2019-03-08 00:00:00
+14	2	1	Good.	2019-03-08 00:00:00
+15	2	3	Cool	2019-03-08 00:00:00
+16	2	1	Lets go for a walk?	2019-03-08 00:00:00
+17	2	3	Ok	2019-03-08 00:00:00
+18	2	1	See you in half an hour	2019-03-08 00:00:00
+19	2	3	Good	2019-03-08 00:00:00
+20	2	1	Bye	2019-03-08 00:00:00
+21	3	2	Message 1	2019-02-18 00:00:00
+22	3	4	Message 2	2019-02-18 00:00:00
+23	3	2	Message 3	2019-02-18 00:00:00
+24	3	4	Message 4	2019-02-18 00:00:00
+25	3	2	Message 5	2019-02-18 00:00:00
+26	3	4	Message 6	2019-02-18 00:00:00
+27	3	2	Message 7	2019-02-18 00:00:00
+28	3	4	Message 8	2019-02-18 00:00:00
+29	3	2	Message 9	2019-02-18 00:00:00
+30	3	4	Message 10	2019-02-18 00:00:00
+31	4	4	Test 1	2019-01-18 00:00:00
+32	4	5	Test 2	2019-01-18 00:00:00
+33	4	4	Test 3	2019-01-18 00:00:00
+34	4	5	Test 4	2019-01-18 00:00:00
+35	4	4	Test 5	2019-01-18 00:00:00
+36	4	5	Test 6	2019-01-18 00:00:00
+37	4	4	Test 7	2019-01-18 00:00:00
+38	4	5	Test 8	2019-01-18 00:00:00
+39	4	4	Test 9	2019-01-18 00:00:00
+40	4	5	Test 10	2019-01-18 00:00:00
+41	5	3	A	2019-01-11 00:00:00
+42	5	5	B	2019-01-11 00:00:00
+43	5	3	C	2019-01-11 00:00:00
+44	5	5	D	2019-01-11 00:00:00
+45	5	3	E	2019-01-11 00:00:00
+46	5	5	F	2019-01-11 00:00:00
+47	5	3	G	2019-01-11 00:00:00
+48	5	5	H	2019-01-11 00:00:00
+49	5	3	I	2019-01-11 00:00:00
+50	5	5	J	2019-01-11 00:00:00
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: ekaterina
+--
+
+COPY public.users (user_id, name, nick, avatar) FROM stdin;
+1	Margarita Miller	Tina	\N
+2	Cristopher Smith	Chris	\N
+3	Albert Johnson	Al	\N
+4	Paula Brown	Polly	\N
+5	Edgar Davis	Eddy	\N
+\.
+
+
+--
+-- Name: attachments_attach_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ekaterina
+--
+
+SELECT pg_catalog.setval('public.attachments_attach_id_seq', 1, false);
+
+
+--
+-- Name: chats_chat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ekaterina
+--
+
+SELECT pg_catalog.setval('public.chats_chat_id_seq', 5, true);
+
+
+--
+-- Name: members_member_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ekaterina
+--
+
+SELECT pg_catalog.setval('public.members_member_id_seq', 10, true);
+
+
+--
+-- Name: messages_message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ekaterina
+--
+
+SELECT pg_catalog.setval('public.messages_message_id_seq', 50, true);
+
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ekaterina
+--
+
+SELECT pg_catalog.setval('public.users_user_id_seq', 5, true);
+
+
+--
+-- Name: attachments attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.attachments
+    ADD CONSTRAINT attachments_pkey PRIMARY KEY (attach_id);
+
+
+--
+-- Name: chats chats_pkey; Type: CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.chats
+    ADD CONSTRAINT chats_pkey PRIMARY KEY (chat_id);
+
+
+--
+-- Name: members members_pkey; Type: CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.members
+    ADD CONSTRAINT members_pkey PRIMARY KEY (member_id);
+
+
+--
+-- Name: messages messages_pkey; Type: CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT messages_pkey PRIMARY KEY (message_id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (user_id);
+
+
+--
+-- Name: attachments attachments_chat_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.attachments
+    ADD CONSTRAINT attachments_chat_id_fkey FOREIGN KEY (chat_id) REFERENCES public.chats(chat_id);
+
+
+--
+-- Name: attachments attachments_message_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.attachments
+    ADD CONSTRAINT attachments_message_id_fkey FOREIGN KEY (message_id) REFERENCES public.messages(message_id);
+
+
+--
+-- Name: attachments attachments_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.attachments
+    ADD CONSTRAINT attachments_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+
+
+--
+-- Name: members members_chat_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.members
+    ADD CONSTRAINT members_chat_id_fkey FOREIGN KEY (chat_id) REFERENCES public.chats(chat_id);
+
+
+--
+-- Name: members members_last_read_message_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.members
+    ADD CONSTRAINT members_last_read_message_id_fkey FOREIGN KEY (last_read_message_id) REFERENCES public.messages(message_id);
+
+
+--
+-- Name: members members_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.members
+    ADD CONSTRAINT members_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+
+
+--
+-- Name: messages messages_chat_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT messages_chat_id_fkey FOREIGN KEY (chat_id) REFERENCES public.chats(chat_id);
+
+
+--
+-- Name: messages messages_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ekaterina
+--
+
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT messages_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

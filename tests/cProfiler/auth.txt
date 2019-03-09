@@ -1,0 +1,44 @@
+PATH: '/auth/'
+         696 function calls (692 primitive calls) in 0.002 seconds
+
+   Ordered by: internal time, call count
+   List reduced from 161 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        4    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x10a37e050}
+        6    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/urls.py:452(url_quote)
+        4    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/urls.py:404(url_parse)
+        5    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/urls.py:361(_unquote_to_bytes)
+        4    0.000    0.000    0.000    0.000 <string>:1(__new__)
+      131    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+        1    0.000    0.000    0.001    0.001 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/wrappers.py:1187(get_wsgi_headers)
+        1    0.000    0.000    0.001    0.001 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/urls.py:590(uri_to_iri)
+        3    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/urls.py:622(iri_to_uri)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/utils.py:344(redirect)
+       11    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/local.py:68(__getattr__)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1261(bind_to_environ)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1443(match)
+    24/20    0.000    0.000    0.000    0.000 {method 'decode' of 'bytes' objects}
+        7    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/local.py:160(top)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/urls.py:157(decode_netloc)
+        6    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:753(match)
+       36    0.000    0.000    0.000    0.000 {method 'encode' of 'str' objects}
+       10    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+        4    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/bin/../lib/python3.7/encodings/idna.py:184(decode)
+        3    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1334(_get_wsgi_string)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/ctx.py:383(pop)
+        3    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/datastructures.py:1187(set)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/ctx.py:341(push)
+       16    0.000    0.000    0.000    0.000 {method 'find' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/urls.py:85(port)
+        2    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/urls.py:492(url_unparse)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/wrappers.py:830(__init__)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/urls.py:303(encode_netloc)
+       10    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+
+
+--------------------------------------------------------------------------------
+
+127.0.0.1 - - [10/Mar/2019 01:07:06] "GET /auth/ HTTP/1.1" 302 -
+2253dbaac10a8b9663e5b0d4c2612d592bffef96edaaea009de168be105a29a76fa7c475284bb86d49e71
+--------------------------------------------------------------------------------

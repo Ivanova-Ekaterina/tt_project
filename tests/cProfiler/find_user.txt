@@ -1,0 +1,43 @@
+PATH: '/find_user/'
+         735 function calls (734 primitive calls) in 0.052 seconds
+
+   Ordered by: internal time, call count
+   List reduced from 208 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.041    0.041    0.041    0.041 {built-in method psycopg2._psycopg._connect}
+        1    0.005    0.005    0.005    0.005 {function DictCursor.execute at 0x10c005840}
+        2    0.003    0.002    0.003    0.002 {built-in method psycopg2._psycopg.parse_dsn}
+        1    0.000    0.000    0.001    0.001 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1261(bind_to_environ)
+        1    0.000    0.000    0.052    0.052 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/app.py:2262(wsgi_app)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/ctx.py:428(auto_pop)
+        1    0.000    0.000    0.001    0.001 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/ctx.py:279(__init__)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1443(match)
+        3    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1334(_get_wsgi_string)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/ctx.py:341(push)
+       21    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/local.py:160(top)
+       11    0.000    0.000    0.000    0.000 {method 'sort' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1374(__init__)
+       26    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+       25    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/local.py:68(__getattr__)
+       10    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:867(match_compare_key)
+        2    0.000    0.000    0.001    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/app.py:1997(create_url_adapter)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1220(bind)
+       63    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+        1    0.000    0.000    0.045    0.045 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/psycopg2/__init__.py:85(connect)
+        4    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:753(match)
+        1    0.000    0.000    0.050    0.050 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/app.py:1779(dispatch_request)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/wrappers.py:830(__init__)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/json/__init__.py:257(jsonify)
+        2    0.000    0.000    0.003    0.002 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/psycopg2/extensions.py:148(make_dsn)
+        1    0.000    0.000    0.050    0.050 /Users/ekaterina/Documents/track/backend/tt_project/app/db.py:19(query_one)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1347(update)
+    22/21    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+       15    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/local.py:300(_get_current_object)
+        1    0.000    0.000    0.000    0.000 /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py:204(iterencode)
+
+
+--------------------------------------------------------------------------------
+
+127.0.0.1 - - [10/Mar/2019 01:03:34] "GET /find_user/?nick=Tina HTTP/1.1" 200 -
+

@@ -12,6 +12,7 @@ def list_messages_by_chat(chat_id, limit):
         LIMIT %(limit)s
     """, chat_id=int(chat_id), limit=int(limit))
 
+
 def find_users(name):
     return db.query_all("""
         SELECT user_id, nick
@@ -20,6 +21,7 @@ def find_users(name):
         ORDER BY user_id
     """, name=name)
 
+
 def find_user(nick):
     return db.query_one("""
         SELECT user_id, name
@@ -27,12 +29,14 @@ def find_user(nick):
         WHERE nick=%(nick)s
     """, nick=nick)
 
+
 def create_personal_chat(topic):
-      db.insert("""
+    db.insert("""
 	INSERT INTO Chats(is_group_chat, topic, last_message)
 	VALUES (false, %(topic)s, 'create chat')
         """, topic=topic)
-      db._commit_db('insert', 0)     
+    db._commit_db('insert', 0)
+
 
 def get_chats_list(nick):
     return db.query_all("""
@@ -43,12 +47,14 @@ def get_chats_list(nick):
         WHERE Users.nick=%(nick)s
     """, nick=nick)
 
+
 def get_chat_by_topic(topic):
     return db.query_one("""
         SELECT chat_id
         FROM Chats
         WHERE topic=%(topic)s
     """, topic=topic)
+
 
 def send_message(nick, chat, content):
     user_id = str(find_user(nick)["user_id"])
@@ -63,7 +69,8 @@ def send_message(nick, chat, content):
 	WHERE user_id = %(user_id)s
 	AND chat_id = %(chat_id)s
         """, chat_id=int(chat_id), user_id=int(user_id), message=content)
-    db._commit_db('insert', 0) 
+    db._commit_db('insert', 0)
+
 
 def get_message_id_by_content(content):
     return db.query_one("""
@@ -71,6 +78,7 @@ def get_message_id_by_content(content):
         FROM Messages
         WHERE content=%(content)s
     """, content=content)
+
 
 def read_message(nick, chat, content):
     user_id = str(find_user(nick)["user_id"])

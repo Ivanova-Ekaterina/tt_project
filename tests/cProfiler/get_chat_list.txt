@@ -1,0 +1,43 @@
+PATH: '/get_chats_list/'
+         771 function calls (770 primitive calls) in 0.049 seconds
+
+   Ordered by: internal time, call count
+   List reduced from 237 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.033    0.033    0.033    0.033 {built-in method psycopg2._psycopg._connect}
+        1    0.006    0.006    0.006    0.006 {function DictCursor.execute at 0x10c005840}
+        2    0.003    0.002    0.003    0.002 {built-in method binascii.crc32}
+        1    0.003    0.003    0.003    0.003 {method 'dump' of '_pickle.Pickler' objects}
+       96    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+        2    0.000    0.000    0.000    0.000 {method 'recv' of '_socket.socket' objects}
+        1    0.000    0.000    0.000    0.000 /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py:139(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'connect' of '_socket.socket' objects}
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/memcache.py:160(__init__)
+        2    0.000    0.000    0.000    0.000 {method 'sendall' of '_socket.socket' objects}
+        1    0.000    0.000    0.000    0.000 {method 'settimeout' of '_socket.socket' objects}
+        1    0.000    0.000    0.001    0.001 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1261(bind_to_environ)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/ctx.py:428(auto_pop)
+       21    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/local.py:160(top)
+        1    0.000    0.000    0.040    0.040 /Users/ekaterina/Documents/track/backend/tt_project/app/db.py:24(query_all)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        7    0.000    0.000    0.000    0.000 {method 'sub' of 're.Pattern' objects}
+       25    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/local.py:68(__getattr__)
+        2    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/memcache.py:1392(_get_socket)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1374(__init__)
+       13    0.000    0.000    0.000    0.000 {method 'encode' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/memcache.py:1325(__init__)
+        2    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/psycopg2/extensions.py:148(make_dsn)
+        2    0.000    0.000    0.004    0.002 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/memcache.py:422(_get_server)
+        2    0.000    0.000    0.000    0.000 {built-in method psycopg2._psycopg.parse_dsn}
+        2    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/memcache.py:1433(readline)
+        3    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1334(_get_wsgi_string)
+       18    0.000    0.000    0.000    0.000 /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py:333(_iterencode_dict)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1443(match)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/memcache.py:291(<listcomp>)
+
+
+--------------------------------------------------------------------------------
+
+127.0.0.1 - - [10/Mar/2019 01:04:22] "GET /get_chats_list/?nick=Tina HTTP/1.1" 200 -
+

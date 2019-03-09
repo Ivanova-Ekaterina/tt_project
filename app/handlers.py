@@ -1,7 +1,45 @@
-from flask import request, jsonify
-from app import app, isonrpc
+from flask import request, jsonify, redirect
+from app import app, isonrpc, cache
 from app import model
+import requests
+import json
+from werkzeug.contrib.cache import MemcachedCache
+from werkzeug.contrib.cache import SimpleCache
 
+def calculate_value(item, user_id):
+    if (item == 'get_chats_list'):
+        return model.get_chats_list(user_id)
+
+
+@app.route('/')
+def index(name="World"):
+    auth_code = request.args.get('code')
+    response = requests.get('https://oauth.vk.com/access_token?'
+                     + 'client_id=6748743'
+                     + '&client_secret=Zbuk3KaKrXB9og8JyG18'
+                     + '&redirect_uri=http://127.0.0.1:5000/'
+                     + '&code=' + auth_code)
+    response_obj = json.loads(response.text)
+    print(response_obj['access_token'])
+    return "Hello, {}".format(name)
+
+@app.route('/auth/')
+def auth():
+    return redirect("https://oauth.vk.com/authorize?client_id=6748743" +
+                    "&display=page" +
+                    "&redirect_uri=http://127.0.0.1:5000/" +
+                    "&response_type=code" +
+                    "&v=5.92", code=302)
+
+def get_my_item(item, user_id):
+    rv = cache.get(item + user_id)
+    if rv is None:
+        rv = calculate_value(item, user_id)
+        cache.set(item, rv, timeout=5 * 60)
+        print ("from method")
+    else:
+        print("from cache")
+    return rv
 
 @app.route('/messages/', methods=['GET'])
 def messages():
@@ -31,10 +69,11 @@ def find_users():
     mimetype='application/json'
     return resp
 
+
 @app.route('/get_chats_list/', methods=['GET'])
 def get_chats_list():
     nick = request.args.get('nick')
-    chats = model.get_chats_list(nick)
+    chats = get_my_item('get_chats_list', nick) #model.get_chats_list(nick)
     resp = jsonify(chats)
     resp.status_code = 200
     mimetype='application/json'

@@ -1,10 +1,21 @@
-from flask import request, abort, jsonify, json, Response
+from flask import request, abort, jsonify, json, Response, redirect
 
 from app import app
 
 
+@app.route('/auth/')
+def auth():
+    return redirect("https://oauth.vk.com/authorize?client_id=6748743" +
+                    "&display=page" +
+                    "&redirect_uri=http://127.0.0.1:5000/" +
+                    "&response_type=code" +
+                    "&v=5.92", code=302)
+
+
 @app.route('/')
 def index(name="World"):
+    auth_code = request.args.get('code')
+    print(auth_code)
     return "Hello, {}".format(name)
 
 

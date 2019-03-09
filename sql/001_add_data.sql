@@ -8,10 +8,10 @@ insert into Chats (is_group_chat, topic, last_message)
 values (false, 'tt', 'create chat'),
 	   (false, 'kvant', 'create chat');
 
-insert into Messages (chat_id, user_id, content)
-values (1, 1, 'Hello!'),
-	   (1, 4, 'How are you?'),
-	   (2, 3, 'Better tnan you');
+insert into Messages (chat_id, user_id, content, added_at)
+values (1, 1, 'Hello!', '1997-11-29'),
+	   (1, 4, 'How are you?', '1998-09-14'),
+	   (2, 3, 'Better tnan you', '1997-05-14');
 
 insert into members (chat_id, user_id, new_messages)
 values (1, 1, 'hi'),

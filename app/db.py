@@ -1,14 +1,15 @@
 import flask
 import psycopg2
-import config 
+#import config
+from app.config import ProductionConfig, TestingConfig
 import psycopg2.extras
 
 
 def get_connection ():
     if not hasattr(flask.g, 'dbconn'):
         flask.g.dbconn = psycopg2.connect(
-            database=config.DB_NAME, host=config.DB_HOST,
-            user=config.DB_USER, password=config.DB_PASS)
+            database=TestingConfig.DB_NAME, host=TestingConfig.DB_HOST,
+            user=TestingConfig.DB_USER, password=TestingConfig.DB_PASS)
     return flask.g.dbconn
 
 def get_cursor ():

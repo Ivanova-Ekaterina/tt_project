@@ -1,0 +1,43 @@
+PATH: '/messages/'
+         1567 function calls (1526 primitive calls) in 0.034 seconds
+
+   Ordered by: internal time, call count
+   List reduced from 188 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.024    0.024    0.024    0.024 {function DictCursor.execute at 0x10c005840}
+        1    0.007    0.007    0.008    0.008 {built-in method psycopg2._psycopg._connect}
+      100    0.000    0.000    0.000    0.000 /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py:277(_iterencode_list)
+      406    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+      124    0.000    0.000    0.000    0.000 /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py:333(_iterencode_dict)
+  164/124    0.000    0.000    0.000    0.000 /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py:413(_iterencode)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/ctx.py:428(auto_pop)
+        1    0.000    0.000    0.000    0.000 {function DictCursorBase.fetchall at 0x10c005620}
+       70    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/psycopg2/extras.py:172(__setitem__)
+       22    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/local.py:160(top)
+       13    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/local.py:344(__getattr__)
+        2    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/psycopg2/extensions.py:148(make_dsn)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/wrappers.py:830(__init__)
+       10    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/http.py:757(_dump_date)
+        7    0.000    0.000    0.000    0.000 {method 'sub' of 're.Pattern' objects}
+        1    0.000    0.000    0.001    0.001 /usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py:182(encode)
+       26    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/local.py:68(__getattr__)
+       16    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/local.py:300(_get_current_object)
+        1    0.000    0.000    0.033    0.033 /Users/ekaterina/Documents/track/backend/tt_project/app/handlers.py:46(messages)
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/werkzeug/routing.py:1261(bind_to_environ)
+        1    0.000    0.000    0.032    0.032 /Users/ekaterina/Documents/track/backend/tt_project/app/db.py:24(query_all)
+       10    0.000    0.000    0.000    0.000 {method 'utctimetuple' of 'datetime.datetime' objects}
+       10    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/json/__init__.py:56(default)
+        2    0.000    0.000    0.000    0.000 {built-in method psycopg2._psycopg.parse_dsn}
+        1    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/json/__init__.py:92(_dump_arg_defaults)
+        1    0.000    0.000    0.001    0.001 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/flask/json/__init__.py:257(jsonify)
+       28    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+       10    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/psycopg2/extras.py:163(__init__)
+        2    0.000    0.000    0.000    0.000 /Users/ekaterina/Documents/track/backend/tt_project/venv/lib/python3.7/site-packages/psycopg2/extensions.py:173(<listcomp>)
+
+
+--------------------------------------------------------------------------------
+
+127.0.0.1 - - [10/Mar/2019 01:06:33] "GET /messages/?chat_id=1&limit=20 HTTP/1.1" 200 -
+
