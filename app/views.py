@@ -26,7 +26,7 @@ def login():
         <form method="POST" action="/login/">
             <input name="full_name">
             <input name="user_nickname">
-            <input type="submit">
+            <input id="auth" type="submit">
         </form>
         </body></html>"""
     else:

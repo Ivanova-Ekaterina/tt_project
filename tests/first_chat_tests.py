@@ -1,38 +1,7 @@
 import unittest
 from app import app
 import json
-
-def compare_json_data(source_data_a,source_data_b):
-    def compare(data_a,data_b):
-        if (type(data_a) is list):
-            if (
-                (type(data_b) != list) or
-                (len(data_a) != len(data_b))
-            ):
-                return False
-            for list_index,list_item in enumerate(data_a):
-                if (not compare(list_item,data_b[list_index])):
-                    return False
-            return True
-        if (type(data_a) is dict):
-            if (type(data_b) != dict):
-                 return False
-            for dict_key,dict_value in data_a.items():
-                 if (
-                     (dict_key not in data_b) or
-                     (not compare(dict_value,data_b[dict_key]))
-                 ):
-                      return False
-            return True
-        return (
-            (data_a == data_b) and
-            (type(data_a) is type(data_b))
-		)
-    return (
-        compare(source_data_a,source_data_b) and
-        compare(source_data_b,source_data_a)
-	)
-
+from test import CompareJSON
 
 class AppTest(unittest.TestCase):
     def setUp(self):
@@ -59,7 +28,7 @@ class AppTest(unittest.TestCase):
                          "Tue, 30 Oct 2018 18:22:11 GMT"
                        ]
                 }
-        self.assertEqual(True, compare_json_data(data, json.loads(rv.data)))
+        self.assertEqual(True, CompareJSON.compare_json_data(data, json.loads(rv.data)))
         self.assertEqual("application/json", rv.mimetype)
 
     def test_find_user(self):
@@ -69,7 +38,7 @@ class AppTest(unittest.TestCase):
                  "name": "ivanova ekaterina",
                  "user_id": 1
                }
-        self.assertEqual(True, compare_json_data(data, json.loads(rv.data)))
+        self.assertEqual(True, CompareJSON.compare_json_data(data, json.loads(rv.data)))
         self.assertEqual("application/json", rv.mimetype)
 
     def test_find_users(self):
@@ -81,7 +50,7 @@ class AppTest(unittest.TestCase):
                         "ikate"
                      ]
                }
-        self.assertEqual(True, compare_json_data(data, json.loads(rv.data)))
+        self.assertEqual(True, CompareJSON.compare_json_data(data, json.loads(rv.data)))
         self.assertEqual("application/json", rv.mimetype)
 
     def test_get_chat_lists(self):
@@ -97,7 +66,7 @@ class AppTest(unittest.TestCase):
                          "kvant"
                      ]
                }
-        self.assertEqual(True, compare_json_data(data, json.loads(rv.data)))
+        self.assertEqual(True, CompareJSON.compare_json_data(data, json.loads(rv.data)))
         self.assertEqual("application/json", rv.mimetype)
 
     def test_create_personal_chat(self):

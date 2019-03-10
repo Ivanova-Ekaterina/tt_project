@@ -19,6 +19,5 @@ oauth = OAuth(app)
 app.config.from_object(TestingConfig)
 cache = MemcachedCache(['127.0.0.1:11211'])
 
-
 #from .views import *
 from .handlers import *
