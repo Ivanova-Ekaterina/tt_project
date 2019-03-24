@@ -1,94 +1,59 @@
 from app import db
+from datetime import datetime
 
 
-def list_messages_by_chat(chat_id, limit):
-    return db.query_all("""
-        SELECT user_id, nick, name,
-            message_id, content, added_at
-        FROM Messages
-        JOIN users USING (user_id)
-        WHERE chat_id=%(chat_id)s
-        ORDER BY added_at DESC
-        LIMIT %(limit)s
-    """, chat_id=int(chat_id), limit=int(limit))
+class User(db.Model):
+    user_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    nick = db.Column(db.String(50), nullable=False, unique=True)
+    avatar = db.Column(db.String(50), nullable=True)
+    members = db.relationship('Member', backref='user', lazy = True)
+    messages = db.relationship('Message', backref='user', lazy = True)
+
+    def __init__(self, name, nick):
+        self.name = name
+        self.nick = nick
 
 
-def find_users(name):
-    return db.query_all("""
-        SELECT user_id, nick
-        FROM Users
-        WHERE name=%(name)s
-        ORDER BY user_id
-    """, name=name)
+class Member(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    chat_id = db.Column(db.Integer, db.ForeignKey('chat.chat_id'), nullable=False)
+    member_id = db.Column(db.Integer, primary_key=True)
+    new_messages = db.Column(db.String(50), nullable=False)
+    last_read_message_id = db.Column(db.Integer, db.ForeignKey('message.message_id'), nullable=True)
+
+    def __init__(self, user_id, chat_id):
+        self.user_id = user_id
+        self.chat_id = chat_id
+        self.new_messages = 'add'
 
 
-def find_user(nick):
-    return db.query_one("""
-        SELECT user_id, name
-        FROM Users
-        WHERE nick=%(nick)s
-    """, nick=nick)
+class Chat(db.Model):
+    chat_id = db.Column(db.Integer, primary_key=True)
+    is_group_chat = db.Column(db.Boolean)
+    topic = db.Column(db.String(50), nullable=False, unique=True)
+    last_message = db.Column(db.String(50), nullable=False)
+    members = db.relationship('Member', backref='chat', lazy = True)
+    messages = db.relationship('Message', backref='chat', lazy=True)
+
+    def __init__(self, topic, is_group):
+        self.topic = topic
+        self.is_group_chat = is_group
+        self.last_message = 'insert'
 
 
-def create_personal_chat(topic):
-    db.insert("""
-	INSERT INTO Chats(is_group_chat, topic, last_message)
-	VALUES (false, %(topic)s, 'create chat')
-        """, topic=topic)
-    db._commit_db('insert', 0)
+class Message(db.Model):
+    message_id = db.Column(db.Integer, primary_key=True)
+    chat_id =  db.Column(db.Integer, db.ForeignKey('chat.chat_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    content = db.Column(db.String(50), nullable=False)
+    added_at = db.Column(db.DateTime)
+    last_read_messages = db.relationship('Member', backref='last_read', lazy = True)
+
+    def __init__(self, chat_id, user_id, content):
+        self.chat_id = chat_id
+        self.user_id = user_id
+        self.content = content
+        self.added_at = datetime.today()
 
 
-def get_chats_list(nick):
-    return db.query_all("""
-        SELECT chat_id, topic 
-        FROM Chats
-	JOIN Members USING(chat_id)
-	JOIN Users USING(user_id)
-        WHERE Users.nick=%(nick)s
-    """, nick=nick)
-
-
-def get_chat_by_topic(topic):
-    return db.query_one("""
-        SELECT chat_id
-        FROM Chats
-        WHERE topic=%(topic)s
-    """, topic=topic)
-
-
-def send_message(nick, chat, content):
-    user_id = str(find_user(nick)["user_id"])
-    chat_id = str(get_chat_by_topic(chat)["chat_id"])
-    db.insert("""
-	INSERT INTO Messages(chat_id, user_id, content)
-	VALUES (%(chat_id)s, %(user_id)s, %(content)s)
-        """, chat_id=int(chat_id), user_id=int(user_id), content=content)
-    db.insert("""
-	UPDATE Members
-	SET new_messages = %(message)s
-	WHERE user_id = %(user_id)s
-	AND chat_id = %(chat_id)s
-        """, chat_id=int(chat_id), user_id=int(user_id), message=content)
-    db._commit_db('insert', 0)
-
-
-def get_message_id_by_content(content):
-    return db.query_one("""
-        SELECT message_id
-        FROM Messages
-        WHERE content=%(content)s
-    """, content=content)
-
-
-def read_message(nick, chat, content):
-    user_id = str(find_user(nick)["user_id"])
-    chat_id = str(get_chat_by_topic(chat)["chat_id"])
-    message_id = str(get_message_id_by_content(content)["message_id"])
-    print (message_id)
-    db.insert("""
-	UPDATE Members
-	SET last_read_message_id = %(message_id)s
-	WHERE user_id = %(user_id)s
-	AND chat_id = %(chat_id)s
-        """, chat_id=int(chat_id), user_id=int(user_id), message_id=int(message_id))
-    db._commit_db('update', 0)
