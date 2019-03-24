@@ -1,44 +1,48 @@
 import postgresql
 from datetime import datetime
+import Create_tables
 
+def generate():
+    Create_tables.create_tables()
+    with postgresql.open('pq://ekaterina:@localhost/track_test') as db:
 
-with postgresql.open('pq://ekaterina:@localhost/track_test') as db:
+        db.drop_all()
 
-    ins = db.prepare("INSERT INTO users (nick, name) VALUES ($1, $2)")
+        ins = db.prepare("INSERT INTO users (nick, name) VALUES ($1, $2)")
 
-    ins("Tina", "Margarita Miller")
-    ins("Chris", "Cristopher Smith")
-    ins("Al", "Albert Johnson")
-    ins("Polly", "Paula Brown")
-    ins("Eddy", "Edgar Davis")
+        ins("Tina", "Margarita Miller")
+        ins("Chris", "Cristopher Smith")
+        ins("Al", "Albert Johnson")
+        ins("Polly", "Paula Brown")
+        ins("Eddy", "Edgar Davis")
 
-    ins = db.prepare("INSERT INTO chats (is_group_chat, topic, last_message) VALUES ($1, $2, $3)")
+        ins = db.prepare("INSERT INTO chats (is_group_chat, topic, last_message) VALUES ($1, $2, $3)")
 
-    ins(False, "tt", "Hi!")
-    ins(False, "kvant", "Bye")
-    ins(False, "mipt", "Message 10")
-    ins(False, "intel", "Test 10")
-    ins(False, "home", "J")
+        ins(False, "tt", "Hi!")
+        ins(False, "kvant", "Bye")
+        ins(False, "mipt", "Message 10")
+        ins(False, "intel", "Test 10")
+        ins(False, "home", "J")
 
-    ins = db.prepare("INSERT INTO members (chat_id, user_id, new_messages) VALUES ($1, $2, $3)")
+        ins = db.prepare("INSERT INTO members (chat_id, user_id, new_messages) VALUES ($1, $2, $3)")
 
-    ins(1, 1, "Good morning!")
-    ins(1, 2, "Hi!")
-    ins(2, 1, "Good")
-    ins(2, 3, "Bye")
-    ins(3, 2, "Message 10")
-    ins(3, 4, "Message 9")
-    ins(4, 4, "Test 10")
-    ins(4, 5, "Test 9")
-    ins(5, 3, "J")
-    ins(5, 5, "I")
+        ins(1, 1, "Good morning!")
+        ins(1, 2, "Hi!")
+        ins(2, 1, "Good")
+        ins(2, 3, "Bye")
+        ins(3, 2, "Message 10")
+        ins(3, 4, "Message 9")
+        ins(4, 4, "Test 10")
+        ins(4, 5, "Test 9")
+        ins(5, 3, "J")
+        ins(5, 5, "I")
 
-    ins = db.prepare("INSERT INTO messages (chat_id, user_id, content, added_at) VALUES ($1, $2, $3, $4)")
+        ins = db.prepare("INSERT INTO messages (chat_id, user_id, content, added_at) VALUES ($1, $2, $3, $4)")
 
-    ins(1, 1, 'Hello!',  datetime(2019, 3, 9))
-    ins(1, 1, 'How are you?', datetime(2019, 3, 9))
-    ins(1, 2, 'Better tnan you', datetime(2019, 3, 9))
-    ins(1, 1, 'Ok', datetime(2019, 3, 9))
+        ins(1, 1, 'Hello!',  datetime(2019, 3, 9))
+        ins(1, 1, 'How are you?', datetime(2019, 3, 9))
+        ins(1, 2, 'Better tnan you', datetime(2019, 3, 9))
+        ins(1, 1, 'Ok', datetime(2019, 3, 9))
     ins(1, 2, 'What is the news?', datetime(2019, 3, 9))
     ins(1, 1, 'Nothing', datetime(2019, 3, 9))
     ins(1, 2, 'Bye', datetime(2019, 3, 9))

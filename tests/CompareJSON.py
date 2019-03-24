@@ -2,8 +2,8 @@ def compare_json_data(source_data_a, source_data_b):
     def compare(data_a, data_b):
         if type(data_a) is list:
             if (
-                    (type(data_b) != list) or
-                    (len(data_a) != len(data_b))
+                    (isinstance(data_b, list) is False) or
+                    (isinstance(data_a, type(data_b)) is False)
             ):
                 return False
             used_index = []
@@ -17,8 +17,8 @@ def compare_json_data(source_data_a, source_data_b):
                 if tmp == 0:
                     return False
             return True
-        if type(data_a) is dict:
-            if type(data_b) != dict:
+        if isinstance(data_a, dict) is True:
+            if isinstance(data_b, dict) is False:
                 return False
             for dict_key, dict_value in data_a.items():
                 if (
@@ -29,7 +29,7 @@ def compare_json_data(source_data_a, source_data_b):
             return True
         return (
                 (data_a == data_b) and
-                (type(data_a) is type(data_b))
+                (isinstance(data_a, type(data_b)) is True)
         )
 
     return (

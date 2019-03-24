@@ -16,3 +16,6 @@ class TestCreateChat(TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, dict)
 
+        self.assertEqual(response['topic'], "test")
+        self.assertEqual(response['chat_id'], 1)
+        self.assertFalse(response['is_group_chat'])

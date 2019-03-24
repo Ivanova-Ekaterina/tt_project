@@ -6,11 +6,11 @@ import json
 from werkzeug.contrib.cache import MemcachedCache
 from werkzeug.contrib.cache import SimpleCache
 
+cache = MemcachedCache(['127.0.0.1:11211'])
 
 def calculate_value(item, user_id):
     if (item == 'get_chats_list'):
         return model.get_chats_list(user_id)
-
 
 @app.route('/')
 def index(name="World"):
@@ -54,7 +54,7 @@ def get_my_item(item, user_id):
     rv = cache.get(item + user_id)
     if rv is None:
         rv = calculate_value(item, user_id)
-        cache.set(item, rv, timeout=5 * 60)
+        cache.set(item + user_id, rv, timeout=5 * 60)
         print ("from method")
     else:
         print("from cache")

@@ -1,6 +1,179 @@
 from unittest import TestCase
+import psycopg2
 from app import app
+from app.config import ProductionConfig, TestingConfig
 import json
+import postgresql
+from datetime import datetime
+
+
+def create_tables():
+    """ create tables in the PostgreSQL database"""
+    commands = (
+        """DROP TABLE attachments""",
+        """DROP TABLE members""",
+        """DROP TABLE messages""",
+        """DROP TABLE users""",
+        """DROP TABLE chats""",
+        """
+       CREATE TABLE users (
+            user_id SERIAL PRIMARY KEY,
+            name text NOT NULL,
+            nick text NOT NULL,
+            avatar text
+            )
+        """,
+        """ 
+        CREATE TABLE chats (
+            chat_id SERIAL PRIMARY KEY,
+            is_group_chat boolean,
+            topic text NOT NULL,
+            last_message text NOT NULL
+            )
+        """,
+        """
+        CREATE TABLE messages (
+            message_id SERIAL PRIMARY KEY,
+            chat_id INTEGER REFERENCES chats(chat_id),
+            user_id INTEGER REFERENCES users(user_id),
+            content text NOT NULL,
+            added_at timestamp NOT NULL
+            )
+        """,
+        """
+        CREATE TABLE attachments (
+            attach_id SERIAL PRIMARY KEY,
+	        message_id INTEGER REFERENCES messages(message_id),
+	        chat_id INTEGER REFERENCES chats(chat_id),
+	        user_id INTEGER REFERENCES users(user_id),
+            type text NOT NULL,
+            url text NOT NULL
+            )
+        """,
+        """
+        CREATE TABLE members (
+            member_id SERIAL PRIMARY KEY,
+	        chat_id INTEGER REFERENCES chats(chat_id),
+	        user_id INTEGER REFERENCES users(user_id),
+            new_messages text NOT NULL,
+	        last_read_message_id INTEGER REFERENCES messages(message_id)
+            )
+        """
+    )
+
+    conn = None
+    try:
+        # read the connection parameters
+        #   params = app.config.TestingConfig()
+        # connect to the PostgreSQL server
+        conn = psycopg2.connect(
+            database=TestingConfig.DB_NAME, host=TestingConfig.DB_HOST,
+            user=TestingConfig.DB_USER, password=TestingConfig.DB_PASS)
+        cur = conn.cursor()
+        # create table one by one
+        for command in commands:
+            cur.execute(command)
+        # close communication with the PostgreSQL database server
+        cur.close()
+        # commit the changes
+        conn.commit()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+
+
+def generate():
+    create_tables()
+    with postgresql.open('pq://ekaterina:@localhost/track_test') as db:
+        ins = db.prepare("INSERT INTO users (nick, name) VALUES ($1, $2)")
+
+        ins("Tina", "Margarita Miller")
+        ins("Chris", "Cristopher Smith")
+        ins("Al", "Albert Johnson")
+        ins("Polly", "Paula Brown")
+        ins("Eddy", "Edgar Davis")
+
+        ins = db.prepare("INSERT INTO chats (is_group_chat, topic, last_message) VALUES ($1, $2, $3)")
+
+        ins(False, "tt", "Hi!")
+        ins(False, "kvant", "Bye")
+        ins(False, "mipt", "Message 10")
+        ins(False, "intel", "Test 10")
+        ins(False, "home", "J")
+
+        ins = db.prepare("INSERT INTO members (chat_id, user_id, new_messages) VALUES ($1, $2, $3)")
+
+        ins(1, 1, "Good morning!")
+        ins(1, 2, "Hi!")
+        ins(2, 1, "Good")
+        ins(2, 3, "Bye")
+        ins(3, 2, "Message 10")
+        ins(3, 4, "Message 9")
+        ins(4, 4, "Test 10")
+        ins(4, 5, "Test 9")
+        ins(5, 3, "J")
+        ins(5, 5, "I")
+
+        ins = db.prepare("INSERT INTO messages (chat_id, user_id, content, added_at) VALUES ($1, $2, $3, $4)")
+
+        ins(1, 1, 'Hello!', datetime(2019, 3, 9))
+        ins(1, 1, 'How are you?', datetime(2019, 3, 9))
+        ins(1, 2, 'Better tnan you', datetime(2019, 3, 9))
+        ins(1, 1, 'Ok', datetime(2019, 3, 9))
+        ins(1, 2, 'What is the news?', datetime(2019, 3, 9))
+        ins(1, 1, 'Nothing', datetime(2019, 3, 9))
+        ins(1, 2, 'Bye', datetime(2019, 3, 9))
+        ins(1, 1, 'Goodbye', datetime(2019, 3, 9))
+        ins(1, 2, 'Good morning!', datetime(2019, 3, 10))
+        ins(1, 1, 'Hi!', datetime(2019, 3, 10))
+
+        ins(2, 1, 'Hi!', datetime(2019, 3, 8))
+        ins(2, 3, 'Hello!', datetime(2019, 3, 8))
+        ins(2, 3, 'How is the weather?', datetime(2019, 3, 8))
+        ins(2, 1, 'Good.', datetime(2019, 3, 8))
+        ins(2, 3, 'Cool', datetime(2019, 3, 8))
+        ins(2, 1, 'Lets go for a walk?', datetime(2019, 3, 8))
+        ins(2, 3, 'Ok', datetime(2019, 3, 8))
+        ins(2, 1, 'See you in half an hour', datetime(2019, 3, 8))
+        ins(2, 3, 'Good', datetime(2019, 3, 8))
+        ins(2, 1, 'Bye', datetime(2019, 3, 8))
+
+        ins(3, 2, 'Message 1', datetime(2019, 2, 18))
+        ins(3, 4, 'Message 2', datetime(2019, 2, 18))
+        ins(3, 2, 'Message 3', datetime(2019, 2, 18))
+        ins(3, 4, 'Message 4', datetime(2019, 2, 18))
+        ins(3, 2, 'Message 5', datetime(2019, 2, 18))
+        ins(3, 4, 'Message 6', datetime(2019, 2, 18))
+        ins(3, 2, 'Message 7', datetime(2019, 2, 18))
+        ins(3, 4, 'Message 8', datetime(2019, 2, 18))
+        ins(3, 2, 'Message 9', datetime(2019, 2, 18))
+        ins(3, 4, 'Message 10', datetime(2019, 2, 18))
+
+        ins(4, 4, 'Test 1', datetime(2019, 1, 18))
+        ins(4, 5, 'Test 2', datetime(2019, 1, 18))
+        ins(4, 4, 'Test 3', datetime(2019, 1, 18))
+        ins(4, 5, 'Test 4', datetime(2019, 1, 18))
+        ins(4, 4, 'Test 5', datetime(2019, 1, 18))
+        ins(4, 5, 'Test 6', datetime(2019, 1, 18))
+        ins(4, 4, 'Test 7', datetime(2019, 1, 18))
+        ins(4, 5, 'Test 8', datetime(2019, 1, 18))
+        ins(4, 4, 'Test 9', datetime(2019, 1, 18))
+        ins(4, 5, 'Test 10', datetime(2019, 1, 18))
+
+        ins(5, 3, 'A', datetime(2019, 1, 11))
+        ins(5, 5, 'B', datetime(2019, 1, 11))
+        ins(5, 3, 'C', datetime(2019, 1, 11))
+        ins(5, 5, 'D', datetime(2019, 1, 11))
+        ins(5, 3, 'E', datetime(2019, 1, 11))
+        ins(5, 5, 'F', datetime(2019, 1, 11))
+        ins(5, 3, 'G', datetime(2019, 1, 11))
+        ins(5, 5, 'H', datetime(2019, 1, 11))
+        ins(5, 3, 'I', datetime(2019, 1, 11))
+        ins(5, 5, 'J', datetime(2019, 1, 11))
+
+
 def compare_json_data(source_data_a, source_data_b):
     def compare(data_a, data_b):
         if type(data_a) is list:
@@ -44,6 +217,8 @@ def compare_json_data(source_data_a, source_data_b):
 class JSONRPCTest(TestCase):
     def setUp(self):
         self.app = app.test_client()
+        generate()
+        #create_tables()
 
     def test_get_messages(self):
         rv = self.app.post('/api/',
