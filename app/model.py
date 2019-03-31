@@ -1,5 +1,6 @@
 from app import db
 from datetime import datetime
+import json
 
 
 class User(db.Model):
@@ -14,6 +15,14 @@ class User(db.Model):
         self.name = name
         self.nick = nick
 
+    def __repr__(self):
+        result = {
+            "user_id":  self.user_id,
+            "name": self.name,
+            "nick": self.nick
+        }
+        return json.dumps(result)
+
 
 class Member(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
@@ -26,6 +35,14 @@ class Member(db.Model):
         self.user_id = user_id
         self.chat_id = chat_id
         self.new_messages = 'add'
+
+    def __repr__(self):
+        result = {
+            "member_id": self.member_id,
+            "user_id": self.user_id,
+            "chat_id": self.chat_id
+        }
+        return json.dumps(result)
 
 
 class Chat(db.Model):
@@ -41,6 +58,14 @@ class Chat(db.Model):
         self.is_group_chat = is_group
         self.last_message = 'insert'
 
+    def __repr__(self):
+        result = {
+            "topic": self.topic,
+            "is_group_chat": self.is_group_chat,
+            "chat_id": self.chat_id
+        }
+        return json.dumps(result)
+
 
 class Message(db.Model):
     message_id = db.Column(db.Integer, primary_key=True)
@@ -55,5 +80,14 @@ class Message(db.Model):
         self.user_id = user_id
         self.content = content
         self.added_at = datetime.today()
+
+    def __repr__(self):
+        result = {
+            "message_id": self.message_id,
+            "chat_id": self.chat_id,
+            "user_id": self.user_id,
+            "content": self.content
+        }
+        return json.dumps(result)
 
 

@@ -1,0 +1,50 @@
+CREATE TABLE clients (
+IdClient SERIAL PRIMARY KEY,
+Name VARCHAR(50) NOT NULL,
+Phone CHAR(11) NOT NULL,
+E_mail VARCHAR(50) NOT NULL UNIQUE,
+BirthdayDay TIMESTAMP DEFAULT NULL,
+);
+
+CREATE TABLE employees (
+IdEmployee SERIAL PRIMARY KEY,
+Name VARCHAR(50) NOT NULL,
+Phone CHAR(11) NOT NULL,
+E_mail VARCHAR(50) NOT NULL UNIQUE,
+Position VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE prices (
+IdPrice SERIAL PRIMARY KEY,
+Complexity ENUM('easy', 'normal', 'hard'),
+Size ENUM('small', 'normal', 'big'),
+Price DOUBLE,
+IsColor  BOOLEAN NOT NULL 
+);
+
+CREATE TABLE tatoos (
+IdTatoo SERIAL PRIMARY KEY,
+IdEmployee SERIAL REFERENCES employees(IdEmployee),
+Name VARCHAR(50) NOT NULL UNIQUE,
+IdPrice SERIAL REFERENCES prices(IdPrice)
+);
+
+CREATE TABLE orders (
+IdOrder SERIAL PRIMARY KEY,
+IdClient SERIAL REFERENCES clients(IdClient),
+IdTatoo SERIAL REFERENCES tatoos(IdTatoo)
+);
+
+CREATE TABLE visits (
+IdVisit SERIAL PRIMARY KEY,
+Dateisit TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+IdOrder SERIAL REFERENCES orders(IdOrder)
+);
+
+
+CREATE TABLE payments (
+IdPayment SERIAL PRIMARY KEY,
+DatePayement TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+IdOrder SERIAL REFERENCES order(IdOrder),
+Pay DOUBLE
+);

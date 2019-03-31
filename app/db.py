@@ -1,54 +1,74 @@
 import flask
 import psycopg2
-#import config
-from app.config import ProductionConfig, TestingConfig
-import psycopg2.extras
+from app import db
+from .model import *
+from .forms import *
 
 
-def get_connection ():
-    if not hasattr(flask.g, 'dbconn'):
-        flask.g.dbconn = psycopg2.connect(
-            database=TestingConfig.DB_NAME, host=TestingConfig.DB_HOST,
-            user=TestingConfig.DB_USER, password=TestingConfig.DB_PASS)
-    return flask.g.dbconn
-
-def get_cursor ():
-    return get_connection().cursor(
-        cursor_factory=psycopg2.extras.DictCursor)
-
-def query_one (sql, **params):
-    with get_cursor() as cur:
-        cur.execute(sql, params)
-        return dict(cur.fetchone())
-
-def query_all (sql, **params):
-     with get_cursor() as cur:
-        cur.execute(sql, params)
-        value = []
-        for row in cur.fetchall():
-            value.append(row)
-        index = list(range(0, len(value)))
-        print (dict(zip(index, value)))
-        return dict(zip(index, value))
-        
-def insert (sql, **params):
-    with get_cursor() as cur:
-        cur.execute(sql, params)
-
-def _rollback_db (sender, exception, **extra):
-    if hasattr(flask.g, 'dbconn'):
-        conn = flask.g.dbconn
-        conn.rollback()
-        conn.close()
-        delattr(flask.g, 'dbconn')
-
-def _commit_db (sender, exception, **extra):
-    if hasattr(flask.g, 'dbconn'):
-        conn = flask.g.dbconn
-        conn.commit()
-        conn.close()
-        #delattr(flask.g, 'dbconn')
+def get_user(nick):
+    user = User.query.filter_by(nick=nick).first()
+    return str(user)
 
 
+def get_chat(topic):
+    chat = Chat.query.filter_by(topic=topic).first()
+    return str(chat)
 
 
+def get_chats():
+    chats = Chat.query.all()
+    return str(chats)
+
+
+def get_all_chats(nick):
+    chats = Chat.query.join(Member).join(User).filter_by(nick=nick).all()
+    return str(chats)
+
+
+def read_ms(topic, nick, message_id):
+    message = Member.query.join(User).join(Chat).filter(User.nick==nick, Chat.topic==topic).first()
+    message.last_read_message_id = message_id
+    db.session.commit()
+    return str(message)
+
+
+def delete_member(topic, nick):
+    delete = Member.query.join(User).join(Chat).filter(User.nick == nick, Chat.topic == topic).first()
+    db.session.delete(delete)
+    db.session.commit()
+    return str(delete)
+
+
+def send_ms(user, chat, content):
+    message = Message(chat, user, content)
+    db.session.add(message)
+    db.session.commit()
+    return str(message)
+
+
+def add_u(chat, user):
+    member = Member(chat, user)
+    db.session.add(member)
+    db.session.commit()
+    return str(member)
+
+
+def create_u(nick, name):
+    user = User(name, nick)
+    db.session.add(user)
+    db.session.commit()
+    return str(user)
+
+
+def create_gr_chat(topic):
+    chat = Chat(topic, True)
+    db.session.add(chat)
+    db.session.commit()
+    return str(chat)
+
+
+def create_pr_chat(topic):
+    chat = Chat(topic, False)
+    db.session.add(chat)
+    db.session.commit()
+    return str(chat)

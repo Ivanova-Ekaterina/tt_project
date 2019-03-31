@@ -23,8 +23,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ekaterina:@localhost/track_o
 db = SQLAlchemy(app)
 migrate = Migrate(db)
 
-cache = MemcachedCache(['127.0.0.1:11211'])
+#cache = MemcachedCache(['127.0.0.1:11211'])
 
 from .views import *
 #from .handlers_old import *
 from app import model
+from .task import *
