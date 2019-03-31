@@ -1,16 +1,17 @@
 from flask import Flask
 from flask_mail import Mail
+from .config import TestingConfig
 from flask_mail import Message
 from app import app
 from .flask_celery import make_celery
 from .db import send_ms
 
-app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'katyna1816@gmail.com'
-app.config['MAIL_PASSWORD'] = 'ester_95'
+app.config['MAIL_SERVER'] = TestingConfig.MAIL_SERVER
+app.config['MAIL_PORT'] = TestingConfig.MAIL_PORT
+app.config['MAIL_USE_TLS'] = TestingConfig.MAIL_USE_TLS
+app.config['MAIL_USE_SSL'] = TestingConfig.MAIL_USE_SSL
+app.config['MAIL_USERNAME'] = TestingConfig.MAIL_USERNAME
+app.config['MAIL_PASSWORD'] = TestingConfig.MAIL_PASSWORD
 
 ADMINS = ['ivanova.eka.v@gmail.com']
 
