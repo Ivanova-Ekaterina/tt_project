@@ -2,7 +2,7 @@ from flask import Flask
 import sys
 from flask_sqlalchemy import SQLAlchemy
 from app.config import ProductionConfig, TestingConfig
-from authlib.flask.client import OAuth
+#from authlib.flask.client import OAuth
 from flask_jsonrpc import JSONRPC
 from werkzeug.contrib.cache import MemcachedCache
 from werkzeug.contrib.cache import SimpleCache
@@ -16,10 +16,10 @@ app = Flask(__name__)
 #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
 
 isonrpc = JSONRPC(app, '/api/')
-oauth = OAuth(app)
-#app.config.from_object(TestingConfig)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ekaterina:@localhost/track_orm'
+#oauth = OAuth(app)
+app.config.from_object(ProductionConfig)
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://quack:ewTe6pEFyIK@89.208.84.222/quack'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ekaterina:@localhost/track_orm'
 db = SQLAlchemy(app)
 migrate = Migrate(db)
 
@@ -28,4 +28,4 @@ migrate = Migrate(db)
 from .views import *
 #from .handlers_old import *
 from app import model
-from .task import *
+#from .task import *
