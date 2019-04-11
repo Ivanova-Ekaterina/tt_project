@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 import sys
 from flask_sqlalchemy import SQLAlchemy
 from app.config import ProductionConfig, TestingConfig
@@ -12,6 +13,7 @@ from flask_migrate import Migrate, MigrateCommand
 
 
 app = Flask(__name__)
+cors = CORS(app)
 #cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
 
