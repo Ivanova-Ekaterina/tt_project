@@ -1,13 +1,13 @@
 class Config(object):
-   TESTING = False
+    TESTING = False
 
 class ProductionConfig(Config):
-    TESTING = False
-    DB_NAME = "track"
-    DB_HOST = "localhost"
-    DB_USER = "ekaterina"
-    DB_PASS = ""
-    SQLALCHEMY_DATABASE_URI = 'postgres://quack:ewTe6pEFyIK@192.168.18.73/quack'
+    TESTING = True
+    DB_NAME = "quack"
+    DB_HOST = "89.208.84.222"
+    DB_USER = "quack"
+    DB_PASS = "ewTe6pEFyIK"
+    SQLALCHEMY_DATABASE_URI = 'postgres://quack:ewTe6pEFyIK@89.208.84.222/quack'
 
 class TestingConfig(Config):
     TESTING = True

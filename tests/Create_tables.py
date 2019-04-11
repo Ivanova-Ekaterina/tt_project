@@ -54,7 +54,7 @@ def create_tables():
     conn = None
     try:
         # read the connection parameters
-        params = app.config.TestingConfig()
+        params = app.config.ProductionConfig()
         # connect to the PostgreSQL server
         conn = psycopg2.connect(**params)
         cur = conn.cursor()

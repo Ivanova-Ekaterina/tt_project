@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db4871db-3ffe-47d0-be0f-e96bbc541af9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/celerybeat-schedule" beforeDir="false" afterPath="$PROJECT_DIR$/celerybeat-schedule" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/public/.gitkeep" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/nginx.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/nginx.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Create_tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Create_tables.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +36,7 @@
         <counts>
           <entry key="celery" value="1" />
           <entry key="coverage" value="2" />
-          <entry key="py" value="199" />
+          <entry key="py" value="200" />
           <entry key="sql" value="3" />
           <entry key="test_dump" value="1" />
           <entry key="txt" value="3" />
@@ -49,21 +45,21 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="6" />
-          <entry key="Python" value="200" />
+          <entry key="Python" value="201" />
           <entry key="SQL" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="47" />
-          <entry key="py" value="10123" />
+          <entry key="py" value="10146" />
           <entry key="sql" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="47" />
-          <entry key="Python" value="10123" />
+          <entry key="Python" value="10146" />
           <entry key="SQL" value="1" />
         </counts>
       </usages-collector>
@@ -74,8 +70,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
+            <state relative-caret-position="-19">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+              <folding>
+                <element signature="e#0#46#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -95,8 +103,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="269">
+              <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -146,8 +154,8 @@
         <option value="$PROJECT_DIR$/app/db.py" />
         <option value="$PROJECT_DIR$/app/forms.py" />
         <option value="$PROJECT_DIR$/app/task.py" />
-        <option value="$PROJECT_DIR$/app/config.py" />
         <option value="$PROJECT_DIR$/app/views.py" />
+        <option value="$PROJECT_DIR$/app/config.py" />
         <option value="$PROJECT_DIR$/app/__init__.py" />
       </list>
     </option>
@@ -559,20 +567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/db.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -583,10 +577,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-19">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="269">
+          <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
