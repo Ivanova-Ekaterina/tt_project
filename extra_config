@@ -1,0 +1,11 @@
+server {
+	listen 80;
+	#server_name  localhost;
+	location /API/ {
+		proxy_pass http://127.0.0.1:5000;
+	}
+	location / {
+		root /Users/ekaterina/Documents/track/backend/tt_project/public;
+		index  index.html index.htm;
+	}
+}

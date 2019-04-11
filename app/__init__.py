@@ -17,9 +17,10 @@ app = Flask(__name__)
 
 isonrpc = JSONRPC(app, '/api/')
 oauth = OAuth(app)
-#app.config.from_object(TestingConfig)
+#app.config.from_object(ProductionConfig)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ekaterina:@localhost/track_orm'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://quack:ewTe6pEFyIK@192.168.18.73/quack'
 db = SQLAlchemy(app)
 migrate = Migrate(db)
 

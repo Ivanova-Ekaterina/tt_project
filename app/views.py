@@ -4,6 +4,11 @@ from app import app, db
 from .db import *
 from .task import send_create_chat
 
+#@app.route('/')
+#def index(name="World"):
+#    auth_code = request.args.get('code')
+#    print(auth_code)
+#    return "Hello, {}".format(name)
 
 @app.route('/create_chat_form/', methods=['GET', 'POST'])
 def create_chat_f():
@@ -117,6 +122,15 @@ def leave_from_chat(topic, nick):
     delete = delete_member(topic, nick)
     return str(delete)
 
+@app.route('/create_chat_with_user/<string:topic>&<string:nick1>&<string:nick2>')
+def create_chat_with_user(topic, nick1, nick2):
+    create = create_pr_chat(topic);
+    nick1 = find_user(nick1)
+    nick2 = find_user(nick2)
+    print (create)
+   # add_u(chat, nick1) #int
+   # add_u(chat, nick2) #int
+    return str(create)
 
 @app.route('/auth/')
 def auth():
