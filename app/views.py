@@ -124,13 +124,18 @@ def leave_from_chat(topic, nick):
 
 @app.route('/API/create_chat_with_user/<string:topic>&<string:nick1>&<string:nick2>')
 def create_chat_with_user(topic, nick1, nick2):
-    create = create_pr_chat(topic);
-    nick1 = find_user(nick1)
-    nick2 = find_user(nick2)
-    print (create)
-   # add_u(chat, nick1) #int
-   # add_u(chat, nick2) #int
-    return str(create)
+    create = create_pr_chat(topic)
+    u1 = get_user(nick1)
+    u2 = get_user(nick2)
+    print (create.chat_id)
+    add_u(u1.user_id, create.chat_id)
+    add_u(u2.user_id, create.chat_id)
+    return str('ok')
+
+@app.route('/API/delete_chat/<string:topic>')
+def delete_chat_with_members(topic):
+    chat = delete_chat(topic)
+    return str(chat)
 
 @app.route('/API/auth/')
 def auth():

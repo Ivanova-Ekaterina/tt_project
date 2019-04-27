@@ -7,7 +7,7 @@ from .forms import *
 
 def get_user(nick):
     user = User.query.filter_by(nick=nick).first()
-    return str(user)
+    return user
 
 
 def get_chat(topic):
@@ -71,4 +71,13 @@ def create_pr_chat(topic):
     chat = Chat(topic, False)
     db.session.add(chat)
     db.session.commit()
-    return str(chat)
+    return chat
+
+def delete_chat(topic):
+    delete = Member.query.join(User).join(Chat).filter(Chat.topic == topic)
+    for d in delete:
+        db.session.delete(d)
+    delete_c = Chat.query.filter(Chat.topic == topic).first()
+    db.session.delete(delete_c)
+    db.session.commit()
+    return delete_c
