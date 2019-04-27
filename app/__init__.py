@@ -18,11 +18,11 @@ cors = CORS(app)
 #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
 
 isonrpc = JSONRPC(app, '/api/')
-#app.config.from_object(ProductionConfig)
+app.config.from_object(ProductionConfig)
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ekaterina:@localhost/track_orm'
 #oauth = OAuth(app)
-app.config.from_object(TestingConfig)
+#app.config.from_object(TestingConfig)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://quack:ewTe6pEFyIK@89.208.84.222/quack'
 db = SQLAlchemy(app)
 migrate = Migrate(db)
